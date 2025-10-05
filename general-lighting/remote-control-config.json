@@ -1,0 +1,28 @@
+{
+  "devices": [
+    {
+      "name": "Entre",
+      "ip": "192.168.1.126",
+      "description": "Entre switches",
+      "controls": [
+        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "description": "[1] Gang spots" },
+        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
+        { "ip": "2cbcbba1fefc.shelly.home", "channel": 1, "description": "[2] Udendørs hus lys" }
+      ]
+    },
+    {
+      "name": "Kaffe niche",
+      "ip": "192.168.1.204",
+      "description": "Kaffe niche switches",
+      "controls": [
+        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "description": "[1] Gang spots" },
+        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
+        { "ip": "2cbcbb9f4cb4.shelly.home", "channel": 1, "description": "[2] Alrum kip spots" },
+        { "ip": "3030f9ec2a60.shelly.home", "channel": 0, "description": "[3] Kaffe niche lys" }
+      ]
+    }
+  ],
+  "scriptId": 1,
+  "scriptName": "remote-control"
+}

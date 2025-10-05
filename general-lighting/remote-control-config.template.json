@@ -1,0 +1,73 @@
+{
+  "devices": [
+    {
+      "name": "Example Living Room I4",
+      "ip": "192.168.1.100",
+      "description": "Living room wall switches - replace with your actual device",
+      "controls": [
+        { 
+          "ip": "192.168.1.150", 
+          "channel": 0, 
+          "description": "Input 0 - Main ceiling lights" 
+        },
+        { 
+          "ip": "192.168.1.150", 
+          "channel": 1, 
+          "description": "Input 1 - Floor lamp" 
+        },
+        { 
+          "ip": "0.0.0.0", 
+          "channel": 0, 
+          "description": "Input 2 - Not used (set IP to 0.0.0.0 to disable)" 
+        },
+        { 
+          "ip": "0.0.0.0", 
+          "channel": 0, 
+          "description": "Input 3 - Not used" 
+        }
+      ]
+    },
+    {
+      "name": "Example Kitchen I4",
+      "ip": "192.168.1.101",
+      "description": "Kitchen wall switches - replace with your actual device",
+      "controls": [
+        { 
+          "ip": "kitchen-dimmer.shelly.home", 
+          "channel": 0, 
+          "description": "Input 0 - Main kitchen lights (can use mDNS hostnames)" 
+        },
+        { 
+          "ip": "kitchen-dimmer.shelly.home", 
+          "channel": 1, 
+          "description": "Input 1 - Under-cabinet lights" 
+        },
+        { 
+          "ip": "192.168.1.152", 
+          "channel": 0, 
+          "description": "Input 2 - Dining room (can use IP addresses)" 
+        },
+        { 
+          "ip": "0.0.0.0", 
+          "channel": 0, 
+          "description": "Input 3 - Not used" 
+        }
+      ]
+    }
+  ],
+  "scriptId": 1,
+  "scriptName": "remote-control",
+  "_comments": {
+    "devices": "Array of I4 Plus devices to deploy to",
+    "name": "Friendly name for your reference",
+    "ip": "IP address or mDNS hostname (format: MACADDRESS.shelly.home)",
+    "description": "Description of device location/purpose",
+    "controls": "Array of exactly 4 objects (one per I4 input), in order: Input 0, 1, 2, 3",
+    "controls.ip": "IP/hostname of dimmer to control, or 0.0.0.0 to disable",
+    "controls.channel": "Dimmer channel: 0 = Output 1, 1 = Output 2",
+    "controls.description": "What this button controls",
+    "scriptId": "Script ID on device (usually 1)",
+    "scriptName": "Name for the script on device"
+  }
+}
+

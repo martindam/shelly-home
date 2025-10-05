@@ -1,0 +1,20 @@
+{
+  "name": "shelly-scripts",
+  "version": "1.0.0",
+  "description": "Shelly device automation scripts with deployment tools",
+  "scripts": {
+    "deploy": "node deploy-remote-control.js",
+    "deploy:dry-run": "node deploy-remote-control.js --dry-run",
+    "deploy:help": "node deploy-remote-control.js --help"
+  },
+  "keywords": [
+    "shelly",
+    "home-automation",
+    "smart-home",
+    "dimmer",
+    "lighting"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+
