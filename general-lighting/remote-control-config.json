@@ -99,6 +99,17 @@
         { "ip": "2cbcbba195d0.shelly.home", "channel": 0, "description": "[3] Spisebord spots" },
         { "ip": "2cbcbba38b2c.shelly.home", "channel": 1, "description": "[4] Spisebord lampe" }
       ]
+    },
+    {
+      "name": "Lille bad",
+      "ip": "192.168.1.44",
+      "description": "Kontakt i lille badeværelse",
+      "controls": [
+        { "ip": "2cbcbba1e090.shelly.home", "channel": 0, "description": "[1] Spots" },
+        { "ip": "2cbcbba1e090.shelly.home", "channel": 1, "description": "[2] LED bånd" },
+        { "ip": "0.0.0.0", "channel": 0, "description": "[3] Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "description": "[4] Disabled" }
+      ]
     }
   ],
   "scriptId": 1,

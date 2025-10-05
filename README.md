@@ -1,10 +1,11 @@
 # Shelly Device Scripts
 
-This repository contains a collection of JavaScript scripts for controlling Shelly smart home devices. The scripts are organized into three main groups: **Garage Lighting Control**, **Outdoor Lighting Control**, and **General Lighting Control**.
+This repository contains a collection of JavaScript scripts for controlling Shelly smart home devices. The scripts are organized into three main categories with an automated deployment system for easy management.
 
 ## Table of Contents
 
 - [Overview](#overview)
+- [Project Structure](#project-structure)
 - [Garage Lighting Control](#garage-lighting-control)
 - [Outdoor Lighting Control](#outdoor-lighting-control)
 - [General Lighting Control](#general-lighting-control)
@@ -16,6 +17,42 @@ This repository contains a collection of JavaScript scripts for controlling Shel
 ## Overview
 
 These scripts leverage Shelly's scripting capabilities to create advanced automation and control scenarios. Each script is designed to run on specific Shelly devices and communicate with other devices via RPC (Remote Procedure Call) over HTTP.
+
+The repository includes an **automated deployment system** for general lighting control, allowing you to manage multiple Shelly I4 Plus devices from a single configuration file.
+
+## Project Structure
+
+```
+shelly/
+├── garage-lighting/          # Garage lighting automation
+│   ├── garage-control.js           # Main control logic (I4 Plus)
+│   ├── leader-follower-sync.js     # Dimmer synchronization
+│   ├── input-forwarder.js          # Secondary I4 input forwarding
+│   └── overcurrent-resolver.js     # Overcurrent protection handler
+│
+├── outdoor-lighting/         # Outdoor lighting automation
+│   ├── outdoor-light.js            # Time-based & motion control
+│   └── motion-sensor-relay.js      # Motion sensor interface
+│
+├── general-lighting/         # General lighting + deployment system
+│   ├── remote-control.js                  # Base remote control script
+│   ├── deploy-remote-control.js           # Automated deployment tool
+│   ├── remote-control-config.json         # Central device configuration
+│   ├── remote-control-config.template.json # Configuration template
+│   ├── deploy.sh                          # Shell deployment wrapper
+│   ├── package.json                       # Node.js dependencies
+│   │
+│   └── Documentation/
+│       ├── START-HERE.md                  # Entry point for new users
+│       ├── QUICKSTART.md                  # 5-minute setup guide
+│       ├── DEPLOYMENT-README.md           # Quick reference
+│       ├── DEPLOYMENT-SUMMARY.md          # Command reference
+│       ├── DEPLOYMENT-SYSTEM-OVERVIEW.md  # Complete system overview
+│       ├── REMOTE-CONTROL-DEPLOYMENT.md   # Full documentation
+│       └── INSTALLATION-COMPLETE.md       # Post-installation guide
+│
+└── README.md                 # This file
+```
 
 ### Supported Devices
 
@@ -182,7 +219,11 @@ let MOTION_SENSOR_INPUT = 0;  // Input channel for motion sensor
 
 ## General Lighting Control
 
-### `remote-control.js`
+The general lighting system provides flexible remote control of Shelly dimmers via I4 Plus button controllers, with an **automated deployment system** for managing multiple devices.
+
+### Components
+
+#### 1. `remote-control.js`
 **Device:** Shelly I4 Plus (Button Controller)
 
 A flexible script for controlling Shelly dimmers from button inputs. Each of the four inputs can control a different dimmer device and channel.
@@ -210,11 +251,60 @@ let devices = [
 - Each input can control a different device and channel
 - Channel 0 = Output 1, Channel 1 = Output 2
 
+#### 2. Automated Deployment System
+
+Instead of manually configuring each I4 device, the deployment system allows you to:
+- Define all devices in a single `remote-control-config.json` file
+- Deploy to multiple devices with one command
+- Update configurations and redeploy easily
+
+**Quick Start:**
+```bash
+cd general-lighting
+
+# 1. Edit configuration
+nano remote-control-config.json
+
+# 2. Preview deployment (safe, no changes)
+node deploy-remote-control.js --dry-run
+
+# 3. Deploy to all devices
+node deploy-remote-control.js
+
+# Or deploy to specific device
+node deploy-remote-control.js --device 192.168.1.100
+```
+
+**Configuration Example:**
+```json
+{
+  "devices": [
+    {
+      "name": "Living Room I4",
+      "ip": "192.168.1.100",
+      "controls": [
+        { "ip": "192.168.1.150", "channel": 0, "description": "Main lights" },
+        { "ip": "192.168.1.150", "channel": 1, "description": "Floor lamp" },
+        { "ip": "0.0.0.0", "channel": 0, "description": "Not used" },
+        { "ip": "0.0.0.0", "channel": 0, "description": "Not used" }
+      ]
+    }
+  ]
+}
+```
+
+**Documentation:**
+- **[START-HERE.md](general-lighting/START-HERE.md)** - Entry point for new users
+- **[QUICKSTART.md](general-lighting/QUICKSTART.md)** - 5-minute setup guide
+- **[DEPLOYMENT-README.md](general-lighting/DEPLOYMENT-README.md)** - Quick reference
+- **[DEPLOYMENT-SYSTEM-OVERVIEW.md](general-lighting/DEPLOYMENT-SYSTEM-OVERVIEW.md)** - Complete overview
+- **[REMOTE-CONTROL-DEPLOYMENT.md](general-lighting/REMOTE-CONTROL-DEPLOYMENT.md)** - Full documentation
+
 ---
 
 ## Installation
 
-### General Steps
+### General Steps (Manual Installation)
 
 1. **Access Shelly Web Interface**: Navigate to your Shelly device's IP address in a web browser
 2. **Open Scripts Section**: Go to Settings → Scripts
@@ -229,7 +319,7 @@ let devices = [
 
 1. **Primary I4 Controller**: Install `garage-control.js`
 2. **Primary Dimmer**: Install `leader-follower-sync.js`
-3. **Dimmer**: Install `overcurrent-resolver.js` on all dimmers
+3. **All Dimmers**: Install `overcurrent-resolver.js` on all dimmers
 4. **Secondary I4 (if used)**: Install `input-forwarder.js`
 5. Update all IP addresses and channel numbers to match your setup
 
@@ -242,20 +332,36 @@ let devices = [
 
 #### General Lighting Control
 
-**Option 1: Automated Deployment (Recommended for multiple I4 devices)**
+**Option 1: Automated Deployment (Recommended)**
 
 Use the deployment system to manage multiple I4 Plus devices from a central configuration:
 
-1. Edit `remote-control-config.json` to define all your I4 devices and their button mappings
-2. Run `node deploy-remote-control.js --dry-run` to preview
-3. Run `node deploy-remote-control.js` to deploy to all devices
+```bash
+cd general-lighting
 
-See [REMOTE-CONTROL-DEPLOYMENT.md](REMOTE-CONTROL-DEPLOYMENT.md) for detailed instructions.
+# 1. Edit configuration
+nano remote-control-config.json
+
+# 2. Preview deployment
+node deploy-remote-control.js --dry-run
+
+# 3. Deploy to all devices
+node deploy-remote-control.js
+```
+
+**Benefits:**
+- ✅ Manage all devices from one configuration file
+- ✅ Deploy to multiple devices with one command
+- ✅ Easy updates and redeployment
+- ✅ Preview changes before applying
+
+See **[general-lighting/START-HERE.md](general-lighting/START-HERE.md)** for detailed instructions.
 
 **Option 2: Manual Installation (Single device)**
 
 1. **I4 Plus (Button Controller)**: Install `remote-control.js`
 2. Configure the `devices` array with your dimmer IP addresses and channels
+3. Save and start the script
 
 ---
 
@@ -324,6 +430,52 @@ All scripts include extensive `print()` statements. To view logs:
 2. Navigate to Settings → Scripts
 3. Click on your script
 4. View the "Logs" section
+
+---
+
+## Deployment System Features
+
+The automated deployment system in `general-lighting/` provides:
+
+### Key Features
+
+✅ **Centralized Configuration** - Define all devices in one JSON file  
+✅ **Dry Run Mode** - Preview changes before applying  
+✅ **Selective Deployment** - Deploy to one device or all at once  
+✅ **Auto-Discovery** - Finds and updates existing scripts automatically  
+✅ **Error Handling** - Clear error messages and validation  
+✅ **Documentation** - Comprehensive guides for all skill levels
+
+### Common Commands
+
+```bash
+cd general-lighting
+
+# Preview deployment (safe, no changes)
+node deploy-remote-control.js --dry-run
+
+# Deploy to all devices
+node deploy-remote-control.js
+
+# Deploy to specific device
+node deploy-remote-control.js --device 192.168.1.100
+
+# Show help
+node deploy-remote-control.js --help
+```
+
+### Requirements
+
+- Node.js (v12 or higher)
+- Network access to Shelly devices
+- Shelly Gen2 devices (I4 Plus, Pro Dimmer, Dimmer Gen3)
+
+### Getting Started with Deployment
+
+1. **New Users**: Start with [general-lighting/START-HERE.md](general-lighting/START-HERE.md)
+2. **Quick Setup**: Follow [general-lighting/QUICKSTART.md](general-lighting/QUICKSTART.md)
+3. **Reference**: Use [general-lighting/DEPLOYMENT-README.md](general-lighting/DEPLOYMENT-README.md)
+4. **Deep Dive**: Read [general-lighting/DEPLOYMENT-SYSTEM-OVERVIEW.md](general-lighting/DEPLOYMENT-SYSTEM-OVERVIEW.md)
 
 ---
 
