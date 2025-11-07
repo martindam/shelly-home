@@ -9,7 +9,7 @@
 **/
 
 // Configuration
-let primary_light_ip = 'a0dd6c9f5b18.shelly.home'
+let primary_light_ip = '2cbcbba51064.shelly.home'
 let primary_light_channel = 0
 
 // Input channels

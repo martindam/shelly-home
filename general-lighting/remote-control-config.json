@@ -5,10 +5,10 @@
       "ip": "192.168.1.126",
       "description": "Entre switches",
       "controls": [
-        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "description": "[1] Gang spots" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "2cbcbba1fefc.shelly.home", "channel": 1, "description": "[2] Udendørs hus lys" }
+        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Gang spots" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "2cbcbba1fefc.shelly.home", "channel": 1, "type": "dimmer", "description": "[2] Udendørs hus lys" }
       ]
     },
     {
@@ -16,10 +16,10 @@
       "ip": "192.168.1.204",
       "description": "Kaffe niche switches",
       "controls": [
-        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "description": "[1] Gang spots" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "2cbcbb9f4cb4.shelly.home", "channel": 1, "description": "[2] Alrum kip spots" },
-        { "ip": "3030f9ec2a60.shelly.home", "channel": 0, "description": "[3] Kaffe niche lys" }
+        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Gang spots" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "2cbcbb9f4cb4.shelly.home", "channel": 1, "type": "dimmer", "description": "[2] Alrum kip spots" },
+        { "ip": "3030f9ec2a60.shelly.home", "channel": 0, "type": "switch", "description": "[3] Kaffe niche lys" }
       ]
     },
     {
@@ -27,21 +27,22 @@
       "ip": "192.168.1.174",
       "description": "Kontakt ved dør mellem gang og bryggers",
       "controls": [
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "description": "[1] Gang spots" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" }
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Gang spots" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" }
       ]
     },
     {
       "name": "Gang/værelse 1",
       "ip": "192.168.1.125",
+      "enabled": false,
       "description": "Kontakt mellem værelse 1 og 2 i gangen",
       "controls": [
-        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "description": "[1] Gang spots" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" }
+        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Gang spots" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" }
       ]
     },
     {
@@ -49,10 +50,10 @@
       "ip": "192.168.1.112",
       "description": "Kontakt ved værelse 3 i gangen",
       "controls": [
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "description": "[1] Gang spots" }
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "2cbcbb9ec028.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Gang spots" }
       ]
     },
     {
@@ -60,10 +61,10 @@
       "ip": "192.168.1.113",
       "description": "Kontakt ved køkken 1",
       "controls": [
-        { "ip": "2cbcbb9f4bf8.shelly.home", "channel": 0, "description": "[7] Ovenlys LED" },
-        { "ip": "2cbcbba195d0.shelly.home", "channel": 1, "description": "[1] Køkken spots" },
-        { "ip": "2cbcbba38b2c.shelly.home", "channel": 1, "description": "[4] Spisebord lampe" },
-        { "ip": "2cbcbb9f4cb4.shelly.home", "channel": 0, "description": "[5] Stue spots" }
+        { "ip": "2cbcbb9f4bf8.shelly.home", "channel": 0, "type": "dimmer", "description": "[7] Ovenlys LED" },
+        { "ip": "2cbcbba195d0.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Køkken spots" },
+        { "ip": "2cbcbba38b2c.shelly.home", "channel": 1, "type": "dimmer", "description": "[4] Spisebord lampe" },
+        { "ip": "2cbcbb9f4cb4.shelly.home", "channel": 0, "type": "dimmer", "description": "[5] Stue spots" }
       ]
     },
     {
@@ -71,10 +72,10 @@
       "ip": "192.168.1.119",
       "description": "Kontakt ved køkken 2",
       "controls": [
-        { "ip": "2cbcbba38b2c.shelly.home", "channel": 0, "description": "[2] Køkkenbord" },
-        { "ip": "2cbcbba195d0.shelly.home", "channel": 0, "description": "[3] Spisebord spots" },
-        { "ip": "2cbcbb9f4bf8.shelly.home", "channel": 1, "description": "[6] Stue lampe" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" }
+        { "ip": "2cbcbba38b2c.shelly.home", "channel": 0, "type": "dimmer", "description": "[2] Køkkenbord" },
+        { "ip": "2cbcbba195d0.shelly.home", "channel": 0, "type": "dimmer", "description": "[3] Spisebord spots" },
+        { "ip": "2cbcbb9f4bf8.shelly.home", "channel": 1, "type": "dimmer", "description": "[6] Stue lampe" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" }
       ]
     },
 
@@ -83,10 +84,10 @@
       "ip": "192.168.1.137",
       "description": "Kontakt ved stue 1",
       "controls": [
-        { "ip": "2cbcbb9f4bf8.shelly.home", "channel": 0, "description": "[7] Ovenlys LED" },
-        { "ip": "2cbcbb9f4cb4.shelly.home", "channel": 0, "description": "[5] Stue spots" },
-        { "ip": "2cbcbba195d0.shelly.home", "channel": 1, "description": "[1] Køkken spots" },
-        { "ip": "2cbcbba38b2c.shelly.home", "channel": 0, "description": "[2] Køkkenbord" }
+        { "ip": "2cbcbb9f4bf8.shelly.home", "channel": 0, "type": "dimmer", "description": "[7] Ovenlys LED" },
+        { "ip": "2cbcbb9f4cb4.shelly.home", "channel": 0, "type": "dimmer", "description": "[5] Stue spots" },
+        { "ip": "2cbcbba195d0.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Køkken spots" },
+        { "ip": "2cbcbba38b2c.shelly.home", "channel": 0, "type": "dimmer", "description": "[2] Køkkenbord" }
       ]
     },
     {
@@ -94,10 +95,10 @@
       "ip": "192.168.1.141",
       "description": "Kontakt ved stue 2",
       "controls": [
-        { "ip": "0.0.0.0", "channel": 0, "description": "Disabled" },
-        { "ip": "2cbcbb9f4bf8.shelly.home", "channel": 1, "description": "[6] Stue lampe" },
-        { "ip": "2cbcbba195d0.shelly.home", "channel": 0, "description": "[3] Spisebord spots" },
-        { "ip": "2cbcbba38b2c.shelly.home", "channel": 1, "description": "[4] Spisebord lampe" }
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "Disabled" },
+        { "ip": "2cbcbb9f4bf8.shelly.home", "channel": 1, "type": "dimmer", "description": "[6] Stue lampe" },
+        { "ip": "2cbcbba195d0.shelly.home", "channel": 0, "type": "dimmer", "description": "[3] Spisebord spots" },
+        { "ip": "2cbcbba38b2c.shelly.home", "channel": 1, "type": "dimmer", "description": "[4] Spisebord lampe" }
       ]
     },
     {
@@ -105,10 +106,54 @@
       "ip": "192.168.1.44",
       "description": "Kontakt i lille badeværelse",
       "controls": [
-        { "ip": "2cbcbba1e090.shelly.home", "channel": 0, "description": "[1] Spots" },
-        { "ip": "2cbcbba1e090.shelly.home", "channel": 1, "description": "[2] LED bånd" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "[3] Disabled" },
-        { "ip": "0.0.0.0", "channel": 0, "description": "[4] Disabled" }
+        { "ip": "2cbcbba1e090.shelly.home", "channel": 0, "type": "dimmer", "description": "[1] Spots" },
+        { "ip": "2cbcbba1e090.shelly.home", "channel": 1, "type": "dimmer", "description": "[2] LED bånd" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[3] Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[4] Disabled" }
+      ]
+    },
+    {
+      "name": "Walk through",
+      "ip": "192.168.1.130",
+      "description": "Kontakt i walk through",
+      "controls": [
+        { "ip": "2cbcbba0e2f0.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Soveværelse spots" },
+        { "ip": "2cbcbba501ec.shelly.home", "channel": 1, "type": "dimmer", "description": "[2] Walk through lampe" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[3] Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[4] Disabled" }
+      ]
+    },
+    {
+      "name": "Soveværelse 1",
+      "ip": "192.168.1.49",
+      "description": "Kontakt i soveværelse",
+      "controls": [
+        { "ip": "2cbcbba0e2f0.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Soveværelse spots" },
+        { "ip": "2cbcbba0e2f0.shelly.home", "channel": 0, "type": "dimmer", "description": "[2] Walk in spots" },
+        { "ip": "2cbcbba501ec.shelly.home", "channel": 0, "type": "dimmer", "description": "[3] Soveværelse lampe" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[4] Disabled" }
+      ]
+    },
+    {
+      "name": "Voksen gang",
+      "ip": "192.168.1.185",
+      "description": "Kontakt i gang i voksen afdeling",
+      "controls": [
+        { "ip": "2cbcbba0e2f0.shelly.home", "channel": 0, "type": "dimmer", "description": "[2] Walk in spots" },
+        { "ip": "2cbcbba0e2f0.shelly.home", "channel": 1, "type": "dimmer", "description": "[1] Soveværelse spots" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[3] Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[4] Disabled" }
+      ]
+    },
+    {
+      "name": "Store bad",
+      "ip": "192.168.1.153",
+      "description": "Kontakt store badeværelse",
+      "controls": [
+        { "ip": "2cbcbba405a4.shelly.home", "channel": 1, "type": "dimmer", "description": "[3] Store bad spots" },
+        { "ip": "2cbcbba405a4.shelly.home", "channel": 0, "type": "dimmer", "description": "[2] Store bad LED" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[3] Disabled" },
+        { "ip": "0.0.0.0", "channel": 0, "type": "dimmer", "description": "[4] Disabled" }
       ]
     }
   ],

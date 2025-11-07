@@ -8,7 +8,7 @@
  */
 
 // Configuration
-let primary_i4_ip = '192.168.1.206';
+let primary_i4_ip = '192.168.1.33';
 
 // Optional: Map secondary inputs to different primary inputs
 // If not specified, input 0->0, 1->1, 2->2, 3->3

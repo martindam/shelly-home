@@ -39,8 +39,13 @@ Usage:
 
 Options:
   --dry-run    Show what would be deployed without actually deploying
-  --device IP  Deploy only to the specified device IP
+  --device IP  Deploy only to the specified device IP (even if disabled)
   --help       Show this help message
+
+Configuration:
+  - Set "enabled": false in device config to skip deployment
+  - Devices without "enabled" field default to enabled
+  - Use --device to deploy to a specific device (even if disabled)
 
 Example:
   node deploy-remote-control.js --dry-run
@@ -81,7 +86,8 @@ function generateScript(deviceConfig) {
     let devicesArray = '[\n';
     deviceConfig.controls.forEach((control, index) => {
         const comment = control.description ? `  // ${control.description}` : '';
-        devicesArray += `    { ip: '${control.ip}', channel: ${control.channel} }`;
+        const type = control.type || 'dimmer'; // default to dimmer for backward compatibility
+        devicesArray += `    { ip: '${control.ip}', channel: ${control.channel}, type: '${type}' }`;
         if (index < deviceConfig.controls.length - 1) {
             devicesArray += ',';
         }
@@ -226,8 +232,9 @@ async function deployScript(ip, scriptId, scriptName, scriptCode) {
 
 // Deploy to a single device
 async function deployToDevice(deviceConfig, config) {
+    const enabledStatus = deviceConfig.enabled === false ? ' [DISABLED]' : '';
     console.log(`\n${'='.repeat(60)}`);
-    console.log(`Device: ${deviceConfig.name}`);
+    console.log(`Device: ${deviceConfig.name}${enabledStatus}`);
     console.log(`IP: ${deviceConfig.ip}`);
     console.log(`Description: ${deviceConfig.description}`);
     console.log(`${'='.repeat(60)}`);
@@ -235,7 +242,8 @@ async function deployToDevice(deviceConfig, config) {
     // Show configuration
     console.log('\nConfiguration:');
     deviceConfig.controls.forEach((control, index) => {
-        console.log(`  Input ${index}: ${control.ip} channel ${control.channel} - ${control.description}`);
+        const type = control.type || 'dimmer';
+        console.log(`  Input ${index}: ${control.ip} channel ${control.channel} (${type}) - ${control.description}`);
     });
     
     if (dryRun) {
@@ -289,15 +297,31 @@ async function main() {
     console.log(`\nLoaded configuration from ${CONFIG_FILE}`);
     console.log(`Found ${config.devices.length} device(s) configured\n`);
     
-    // Filter devices if specific device requested
+    // Filter devices: only enabled ones (unless specific device requested)
     let devicesToDeploy = config.devices;
+    
+    // First filter by enabled status (defaults to true if not specified)
+    const enabledDevices = config.devices.filter(d => d.enabled !== false);
+    const disabledCount = config.devices.length - enabledDevices.length;
+    
+    if (disabledCount > 0) {
+        console.log(`Skipping ${disabledCount} disabled device(s)\n`);
+    }
+    
     if (targetDevice) {
+        // If specific device requested, find it (even if disabled)
         devicesToDeploy = config.devices.filter(d => d.ip === targetDevice);
         if (devicesToDeploy.length === 0) {
             console.error(`Error: Device with IP ${targetDevice} not found in configuration`);
             process.exit(1);
         }
+        if (devicesToDeploy[0].enabled === false) {
+            console.log(`⚠️  Warning: Device ${targetDevice} is disabled in configuration but will be deployed anyway\n`);
+        }
         console.log(`Deploying only to device: ${targetDevice}\n`);
+    } else {
+        // Only deploy to enabled devices
+        devicesToDeploy = enabledDevices;
     }
     
     // Deploy to each device
